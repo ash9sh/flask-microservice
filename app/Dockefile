@@ -2,10 +2,10 @@
 FROM python:3.10-slim
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /my-app
 
 # Copy the current directory contents into the container at /app
-COPY . /app
+COPY . /my-app
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
