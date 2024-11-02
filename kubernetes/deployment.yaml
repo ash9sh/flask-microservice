@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-container
-        image: 992382591393.dkr.ecr.us-east-1.amazonaws.com/flask-app-repo
+        image: [your ECR repository URI]
         ports:
         - containerPort: 5000
 
