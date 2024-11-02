@@ -1,4 +1,3 @@
-# tests/test_app.py
 import pytest
 from app.app import app
 
@@ -9,5 +8,5 @@ def client():
 
 def test_home(client):
     response = client.get("/")
-    assert response.data == b"Hello, Flask Microservice!"
+    assert response.data == b"Hello, Flask Microservice!"  # Ensure this matches the app's response
 

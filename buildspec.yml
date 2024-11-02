@@ -6,9 +6,9 @@ phases:
   build:
     commands:
       - pip install -r app/requirements.txt
-      - python -m unittest discover -s tests  # Run tests
+      - python -m unittest discover -s tests
       - docker build -t flask-app:latest .
       - docker tag flask-app:latest 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
-      - aws ecr get-login-password --region us-east-1/ | docker login --username AWS --password-stdin 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app
       - docker push 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
-######
+
