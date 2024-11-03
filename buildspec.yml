@@ -18,7 +18,7 @@ phases:
       - python -m unittest discover -s tests -v
 
       - echo Building Docker image...
-      - docker build -t flask-app:latest -f app/Dockerfile .
+      - docker build -t flask-app:latest -f app/Dockerfile ./app
 
       - echo Tagging Docker image...
       - docker tag flask-app:latest 992382591393.dkr.ecr.us-east-1.amazonaws.com/flask-app:latest
