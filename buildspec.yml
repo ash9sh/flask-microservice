@@ -11,7 +11,8 @@ phases:
       - echo Running unit tests...
       - python -m unittest discover -s tests -v
      # -  python -m unittest tests/test_example.py
-      - docker build -t flask-app:latest app/Dockerfile .
+      - docker build -t flask-app:latest -f app/Dockerfile .
+
       - docker tag flask-app:latest 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app
       - docker push 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
