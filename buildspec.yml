@@ -3,17 +3,29 @@ phases:
   install:
     runtime-versions:
       python: 3.8
-  build:
     commands:
       - echo Installing dependencies...
       - pip install -r app/requirements.txt
 
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app
+
+  build:
+    commands:
       - echo Running unit tests...
-      - python -m unittest discover -s tests -v
-     # -  python -m unittest tests/test_example.py
+      - python -m unittest discover -s tests -v  # Use this if you want to run all tests
+      # - python -m unittest tests/test_example.py  # Uncomment this line to run a specific test
+
+      - echo Building Docker image...
       - docker build -t flask-app:latest -f app/Dockerfile .
 
+      - echo Tagging Docker image...
       - docker tag flask-app:latest 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app
+
+  post_build:
+    commands:
+      - echo Pushing Docker image to ECR...
       - docker push 992382591393.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
 
