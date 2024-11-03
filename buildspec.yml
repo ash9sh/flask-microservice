@@ -2,7 +2,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.8
+      python: 3.8  # This can remain the same
     commands:
       - echo Installing dependencies...
       - pip install -r app/requirements.txt
@@ -15,8 +15,7 @@ phases:
   build:
     commands:
       - echo Running unit tests...
-      - python -m unittest discover -s tests -v  # Use this if you want to run all tests
-      # - python -m unittest tests/test_example.py  # Uncomment this line to run a specific test
+      - python -m unittest discover -s tests -v
 
       - echo Building Docker image...
       - docker build -t flask-app:latest -f app/Dockerfile .
